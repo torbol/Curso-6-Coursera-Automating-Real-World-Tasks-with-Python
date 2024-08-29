@@ -36,9 +36,20 @@ else:
 for archivo in archivos:
     print(archivo)
     img = Image.open(rutaimagenesoriginales + archivo)
-    imgprocesada = img.rotate(-90).resize((128,128)).convert("L") #Convertimos a RGB porque LA no es compatible con JPEG https://pillow.readthedocs.io/en/stable/handbook/concepts.html y https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html
+    imgprocesada = img.rotate(-90).resize((128,128)).convert("RGBA") #Convertimos a L sin canal alfa porque LA no es compatible con JPEG https://pillow.readthedocs.io/en/stable/handbook/concepts.html y https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html
+    if "_black_" in archivo:
+        fondo = Image.new('RGBA', imgprocesada.size, (255,255,255)) #La transparencia de la imagen será Blanco (por defecto) en el nuevo archivo, icono negro.
+    else:
+        fondo = Image.new('RGBA', imgprocesada.size, (0,0,0)) #La transparencia de la imagen será Negro (por defecto) en el nuevo archivo, icono blanco.
+
+    #Componemos la imagen con el fondo + imagen rotada y redimensionada (procesada)
+    alpha_composite = Image.alpha_composite(fondo, imgprocesada).convert("L")
     print("Guardando jpeg en: " + rutaimagenesnuevas + archivo)
-    imgprocesada.save(rutaimagenesnuevas + archivo, "JPEG")
+
+    #Guardamos la imagen en la ruta especificada
+    alpha_composite.save(rutaimagenesnuevas + archivo, "JPEG")
+
+        
     #Comprobamos que se ha guardado correctamente imagen en .jpeg y 128x128
     img = Image.open(rutaimagenesnuevas + archivo)
-    print("Comprobación formato y resolución nueva imagen en /opt/icons: {0}, {1}".format(img.format, img.size))
+    print("Comprobación formato y resolución nueva imagen en {0}: {1}, {2}".format(rutaimagenesnuevas, img.format, img.size))
