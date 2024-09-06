@@ -1,11 +1,16 @@
-Ejercicio 2: Introducción
+# Ejercicio 2: Introducción
 
 Estás trabajando en una compañía que vende coches de segunda mano. Tu compañía está constantemente reogiendo feedback en forma de comentarios que dejan los clientes. Tu manager te pide coger esos comentarios (guardados como archivos .txt) y mostrarlos en la página web de tu compañía. Para hacer esto, necesitarás escribir un script que convierta esos archivos .txt y los procese en diccionarios de Python, luego, que suba los datos al sitio web de la empresa (actualmente usando Django)
 
-Lo que harás:
+#### Lo que harás:
+
 · Utilizar el módulo "OS" de Python para procesar un directorio de archivos de texto.
+
 · Administrar información almacenada en diccionarios de Python.
+
 · Usar el módulo "requests" de Python para subir contenido a un servicio Web en ejecución.
+
 · Entender operaciones básicas de las solicitudes de Python, como los métodos GET y POST.
 
-Resultado ejercicio 2 ejecutado en una máquina virtual propia:
+
+## Resultado ejercicio 2 ejecutado en una máquina virtual propia:
