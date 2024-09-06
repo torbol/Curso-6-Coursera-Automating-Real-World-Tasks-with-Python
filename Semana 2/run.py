@@ -18,7 +18,7 @@ def list_all_txt(feedbackpath_f):
 def upload_dictionary_to_web(dictionary_f3, url_f3):
     """Se hace un request.post para subir el diccionario
     a la página de la empresa"""
-    response = requests.post(url_f3, json=dictionary_f3)
+    response = requests.post(url_f3, data=dictionary_f3)
     if response.status_code == 201: #OK HTTP status code
         print("ENVÍO EXITOSO - El request a la url: {0} ha dado como resultado el código de respuesta: {1}".format(url_f3, response.status_code))
     else: #ERROR HTTP status code
