@@ -13,4 +13,6 @@ Estás trabajando en una compañía que vende coches de segunda mano. Tu compañ
 · Entender operaciones básicas de las solicitudes de Python, como los métodos GET y POST.
 
 
-## Resultado ejercicio 2 ejecutado en una máquina virtual propia:
+## Resultado ejercicio 2:
+A la izquierda se señala en rojo los outputs que proporciona mi programa y a la derecha el resultado una vez refrescada la web:
+![image](https://github.com/user-attachments/assets/771a6fcd-2ab3-4d31-8e7a-46b012d91a11)
