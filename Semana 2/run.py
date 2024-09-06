@@ -4,9 +4,10 @@ import os
 import requests
 import json
 
-#Definición variables globales
-rootpath = '/home/vboxuser' #BORRAR CUANDO TERMINE
-feedbackpath = './data/feedback'
+#Definición constantes globales
+ROOTPATH = '/home/vboxuser' #BORRAR CUANDO TERMINE
+FEEDBACKPATH = './data/feedback' #Ruta comentarios .txt
+URL = "http://<corpweb-external-IP>/feedback" #URL de la página de la empresa. Reemplazar <corpweb-external-IP> con dirección IP externa de corpweb.
 
 def list_all_txt(feedbackpath_f):
     """Lista todos los .txt en la ruta /data/feedback"""
@@ -15,8 +16,18 @@ def list_all_txt(feedbackpath_f):
     feedback_list_names_f.sort() #Ordenamos por numeración ascendente los comentarios
     print(feedback_list_names_f) #BORRAR CUANDO TERMINE
     return feedback_list_names_f
-#TO DO LIST Crear función para hacer request
-def read_every_single_file_to_dictionary(feedbackpath_f2, feedback_list_names_f2):
+
+def upload_dictionary_to_web(dictionary_f3, url_f3):
+    """Se hace un request.post para subir el diccionario
+    a la página de la empresa"""
+
+    response = requests.post(url_f3, params=dictionary_f3)
+    if response.status_code == 200: #OK HTTP status code
+        print("ENVÍO EXITOSO - El requeset a la url: {0} ha dado como resultado el código de respuesta: {1}".format(url_f3, response.status_code))
+    else: #ERROR HTTP status code
+        print("ERROR - El requeset a la url: {0} ha dado como resultado el código de respuesta: {1}".format(url_f3, response.status_code))
+
+def read_every_single_file_to_dictionary(feedbackpath_f2, feedback_list_names_f2, url_f2):
     """Recibe una lista de archivos por parámetro, 
     se leerá cada archivo y se procesará la información 
     como un diccionario Python con la siguiente estructura:
@@ -57,7 +68,7 @@ def read_every_single_file_to_dictionary(feedbackpath_f2, feedback_list_names_f2
             
             
             #TO DO LIST llamar a la función para hacer request
-
+            upload_dictionary_to_web(dictionary, url_f2)
 
 
 
@@ -65,7 +76,7 @@ def read_every_single_file_to_dictionary(feedbackpath_f2, feedback_list_names_f2
 
 
 #main()
-os.chdir(rootpath) #BORRAR CUANDO TERMINE
+os.chdir(ROOTPATH) #BORRAR CUANDO TERMINE
 print(os.getcwd()) #BORRAR CUANDO TERMINE
-feedback_list_names = list_all_txt(feedbackpath) # 1ero obtenemos lista de archivos en carpeta feedback
-read_every_single_file_to_dictionary(feedbackpath, feedback_list_names) # 2do leemos el contenido de cada uno y lo pasamos a un diccionario
+feedback_list_names = list_all_txt(FEEDBACKPATH) # 1ero obtenemos lista de archivos en carpeta feedback
+read_every_single_file_to_dictionary(FEEDBACKPATH, feedback_list_names, URL) # 2do leemos el contenido de cada uno y lo pasamos a un diccionario
