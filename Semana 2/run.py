@@ -14,7 +14,7 @@ def list_all_txt(feedbackpath_f):
 
     feedback_list_names_f = os.listdir(feedbackpath_f) #Guardamos en una lista los nombres de los archivos .txt que hay en la carpeta
     feedback_list_names_f.sort() #Ordenamos por numeración ascendente los comentarios
-    print(feedback_list_names_f) #BORRAR CUANDO TERMINE
+    print(feedback_list_names_f) #Mostramos en consola, los archivos que se van a procesar en forma de lista
     return feedback_list_names_f
 
 def upload_dictionary_to_web(dictionary_f3, url_f3):
@@ -22,7 +22,7 @@ def upload_dictionary_to_web(dictionary_f3, url_f3):
     a la página de la empresa"""
 
     response = requests.post(url_f3, params=dictionary_f3)
-    if response.status_code == 200: #OK HTTP status code
+    if response.status_code == 201: #OK HTTP status code
         print("ENVÍO EXITOSO - El requeset a la url: {0} ha dado como resultado el código de respuesta: {1}".format(url_f3, response.status_code))
     else: #ERROR HTTP status code
         print("ERROR - El requeset a la url: {0} ha dado como resultado el código de respuesta: {1}".format(url_f3, response.status_code))
@@ -40,7 +40,7 @@ def read_every_single_file_to_dictionary(feedbackpath_f2, feedback_list_names_f2
     }
 
     """
-    #Creamos un diccionario local para la función
+    #Creamos un diccionario local para esta función
     dictionary = {
         "title": "",
         "name": "",
@@ -62,21 +62,16 @@ def read_every_single_file_to_dictionary(feedbackpath_f2, feedback_list_names_f2
                     dictionary["date"] = text_lines_list[index][:-1]
                 elif index == 3:
                     dictionary["feedback"] = text_lines_list[index][:-1]
-            print(dictionary.values()) #BORRAR CUANDO TERMINE
-            
-            
-            
-            
-            #TO DO LIST llamar a la función para hacer request
-            upload_dictionary_to_web(dictionary, url_f2)
+
+            upload_dictionary_to_web(dictionary, url_f2) #Subimos el diccionario a la web de la compañía
 
 
 
+#Función principal main()
+def main():
+    print(os.getcwd()) #BORRAR CUANDO TERMINE
+    feedback_list_names = list_all_txt(FEEDBACKPATH) # 1ero obtenemos lista de archivos en carpeta feedback
+    read_every_single_file_to_dictionary(FEEDBACKPATH, feedback_list_names, URL) # 2do leemos el contenido de cada uno y lo pasamos a un diccionario, desde esta función se llamará tambien a la función encargada de hacer el request.post a la web (subir los comentarios)
 
-
-
-#main()
-os.chdir(ROOTPATH) #BORRAR CUANDO TERMINE
-print(os.getcwd()) #BORRAR CUANDO TERMINE
-feedback_list_names = list_all_txt(FEEDBACKPATH) # 1ero obtenemos lista de archivos en carpeta feedback
-read_every_single_file_to_dictionary(FEEDBACKPATH, feedback_list_names, URL) # 2do leemos el contenido de cada uno y lo pasamos a un diccionario
+if __name__ == "__main__":
+    main()
