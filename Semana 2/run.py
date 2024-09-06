@@ -2,12 +2,10 @@
 
 import os
 import requests
-import json
 
-#Definición constantes globales
-ROOTPATH = '/home/vboxuser' #BORRAR CUANDO TERMINE
-FEEDBACKPATH = './data/feedback' #Ruta comentarios .txt
-URL = "http://<corpweb-external-IP>/feedback" #URL de la página de la empresa. Reemplazar <corpweb-external-IP> con dirección IP externa de corpweb.
+#Definición constantes
+FEEDBACKPATH = '/data/feedback' #Ruta comentarios .txt
+URL = "http://<corpweb-external-IP>/feedback/" #URL de la página de la empresa. Reemplazar <corpweb-external-IP> con dirección IP externa de corpweb.
 
 def list_all_txt(feedbackpath_f):
     """Lista todos los .txt en la ruta /data/feedback"""
@@ -20,12 +18,11 @@ def list_all_txt(feedbackpath_f):
 def upload_dictionary_to_web(dictionary_f3, url_f3):
     """Se hace un request.post para subir el diccionario
     a la página de la empresa"""
-
-    response = requests.post(url_f3, params=dictionary_f3)
+    response = requests.post(url_f3, json=dictionary_f3)
     if response.status_code == 201: #OK HTTP status code
-        print("ENVÍO EXITOSO - El requeset a la url: {0} ha dado como resultado el código de respuesta: {1}".format(url_f3, response.status_code))
+        print("ENVÍO EXITOSO - El request a la url: {0} ha dado como resultado el código de respuesta: {1}".format(url_f3, response.status_code))
     else: #ERROR HTTP status code
-        print("ERROR - El requeset a la url: {0} ha dado como resultado el código de respuesta: {1}".format(url_f3, response.status_code))
+        print("ERROR - El request a la url: {0} ha dado como resultado el código de respuesta: {1}".format(url_f3, response.status_code))
 
 def read_every_single_file_to_dictionary(feedbackpath_f2, feedback_list_names_f2, url_f2):
     """Recibe una lista de archivos por parámetro, 
@@ -69,7 +66,6 @@ def read_every_single_file_to_dictionary(feedbackpath_f2, feedback_list_names_f2
 
 #Función principal main()
 def main():
-    print(os.getcwd()) #BORRAR CUANDO TERMINE
     feedback_list_names = list_all_txt(FEEDBACKPATH) # 1ero obtenemos lista de archivos en carpeta feedback
     read_every_single_file_to_dictionary(FEEDBACKPATH, feedback_list_names, URL) # 2do leemos el contenido de cada uno y lo pasamos a un diccionario, desde esta función se llamará tambien a la función encargada de hacer el request.post a la web (subir los comentarios)
 
