@@ -16,3 +16,6 @@ Estás trabajando en una compañía que vende coches de segunda mano. Tu compañ
 ## Resultado ejercicio 2:
 A la izquierda se señala en rojo los outputs que proporciona mi programa y a la derecha el resultado una vez refrescada la web:
 ![image](https://github.com/user-attachments/assets/771a6fcd-2ab3-4d31-8e7a-46b012d91a11)
+
+Video en el que se ve paso a paso el proceso de resolución:
+https://www.youtube.com/watch?v=mO5ZBmFdL60
