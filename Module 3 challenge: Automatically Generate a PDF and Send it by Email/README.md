@@ -13,5 +13,9 @@ Estás trabajando en una compañía que vende coches de segunda mano. Dirección
 
 ## Resultado ejercicio 3:
 Para el último ejercicio opcional, lo de añadari un gráfico, se ha editador el script reports.py, de forma que se le añade un quinto parámetro add_pie_chart=False, que en caso de que se indique al llamar a la función como True, incluirá el pie chart que piden en el pdf.
-[![image]()]()
+### Imagen del gráfico:
+![image](https://github.com/user-attachments/assets/d7edccc9-7400-420d-9776-8e731f1de5f4)
+
+### Imagen de cómo queda PDF ejercicios opcionales:
+[![image](https://github.com/user-attachments/assets/8579c4cd-0ed8-4c34-847a-61a7e1097e10)](https://youtu.be/-U524V4tV3c)
 ***Nota: Si pulsas en la imágen, verás un video en youtube con la resolución del ejercicio paso a paso***
