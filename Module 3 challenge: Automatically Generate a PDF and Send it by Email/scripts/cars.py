@@ -67,6 +67,39 @@ def cars_dict_to_table(car_data):
     table_data.append([item["id"], format_car(item["car"]), item["price"], item["total_sales"]])
   return table_data
 
+# TODO Ejercicio opcional. Ordenar por total_sales y añadir gráfico circular (pie chart)
+def optional_exercise(summary_f, data_f):
+  """Creamos un PDF a parte para el ejercicio opcional en la misma ruta que el bueno:
+
+  1. Ordena de menor a mayor (sort) la lista de coches por ventas totales
+  2. Crea un gráfico de tarta con las ventas totales de cada coche
+  
+  Nota: Este no se enviará por email"""
+
+  # Creamos diccionario donde key será total_sale value una lista de índices
+  diccionario = {}
+  # Creamos una lista donde guardaremos data_f ya ordenado por total_sales
+  data_f_sorted = [] 
+
+  # Comenzamos con el diccionario
+  for list_index in range(0, len(data_f)):
+    valor_total_sales = data_f[list_index]["total_sales"] # Aquí iremos guardando cada valor de total_sales por diccionario en lista data_f
+    if valor_total_sales not in diccionario.keys():
+      diccionario[valor_total_sales] = [list_index]
+    else:
+      diccionario[valor_total_sales].append(list_index)
+
+  # Ordenamos las claves del diccionario (por total_value) de menor a mayor
+  diccionario_sorted = dict(sorted(diccionario.items())) # Diccionario con claves (keys) ordenadas
+
+  # A partir de los índices (valores) recreamos la primera lista de diccionarios data_f ordenada
+  for element in diccionario_sorted.values():
+    for subelement in element:
+      data_f_sorted.append(data_f[subelement])
+
+  # Creamos el PDF
+  reports.generate(filename="/tmp/cars_sorted_by_total_sales.pdf", title="Sales summary for last month", additional_info="{}<br/>{}<br/>{}".format(summary_f[0], summary_f[1], summary_f[2]), table_data=cars_dict_to_table(data_f_sorted), add_pie_chart=True)
+
 
 def main(argv):
   """Process the JSON data and generate a full report out of it."""
@@ -74,9 +107,17 @@ def main(argv):
   summary = process_data(data)
   print(summary)
   # TODO: turn this into a PDF report
-  reports.generate("/tmp/cars.pdf") ####TERMINAR
+  reports.generate(filename="/tmp/cars.pdf", title="Sales summary for last month", additional_info="{}<br/>{}<br/>{}".format(summary[0], summary[1], summary[2]), table_data=cars_dict_to_table(data))
+  # Ejercicio opcional, descomentar si quieres el PDF ordenado
+  optional_exercise(summary, data)
   # TODO: send the PDF report as an email attachment
-  
-
+  mensaje = emails.generate(
+    sender="automation@example.com",
+    recipient="student@example.com",
+    subject="Sales summary for last month",
+    body="The same summary from the PDF, but using \n between the lines",
+    attachment_path="/tmp/cars.pdf"
+  )
+  emails.send(mensaje)
 if __name__ == "__main__":
   main(sys.argv)
