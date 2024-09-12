@@ -34,7 +34,6 @@ def generate(filename, title, additional_info, table_data, add_pie_chart=False):
     for element in table_data:
       if element == ['ID', 'Car', 'Price', 'Total Sales']: # Saltamos primera fila que contiene cabeceras de cada columna
         continue
-      print(element)
 
       # Guardamos en diccionario
       car_make = element[1].split()[0] # Cogemos la primera palabra del string que pertenece al índice 1 de element
@@ -47,7 +46,6 @@ def generate(filename, title, additional_info, table_data, add_pie_chart=False):
     for every_list in list(diccionario.values()): # Cogemos cada lista de valores
       report_pie.data.append(sum(every_list)) # Hacemos la suma de los elementos de cada una de las listas y el total lo añadimos a la lista del gráfico
     report_pie.labels = list(diccionario.keys()) # Etiquetas para el gráfico que corresponden a las marcas de coches car_make
-    print(type(diccionario.values()))
     report_chart.add(report_pie)
     report.build([report_title, empty_line, report_info, empty_line, report_table, report_chart])
   elif add_pie_chart == False:

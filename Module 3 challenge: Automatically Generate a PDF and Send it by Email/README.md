@@ -6,12 +6,12 @@ Estás trabajando en una compañía que vende coches de segunda mano. Dirección
 
 · Escribir un script que resuma y procese datos de venta en diferentes categorías.
 
-· Generar un PDF usando Python.
+· Generar un PDF usando Python (como pruebas opcionales se pide ordenar por ventas totales los coches y añadir un gráfico circular que muestre los fabricantes y el número de ventas totales por fabricante).
 
 · Enviar automáticamente un PDF por email.
 
 
 ## Resultado ejercicio 3:
-
+Para el último ejercicio opcional, lo de añadari un gráfico, se ha editador el script reports.py, de forma que se le añade un quinto parámetro add_pie_chart=False, que en caso de que se indique al llamar a la función como True, incluirá el pie chart que piden en el pdf.
 [![image]()]()
 ***Nota: Si pulsas en la imágen, verás un video en youtube con la resolución del ejercicio paso a paso***
