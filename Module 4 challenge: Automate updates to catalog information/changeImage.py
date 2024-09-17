@@ -39,5 +39,6 @@ for archivo in listaarchivostiff:
 
         
     #Comprobamos que se ha guardado correctamente imagen en .jpeg y 600x400
-    img = Image.open(rutaimagenesnuevas + archivo[:-5] + ".jpeg")
-    print("Comprobación formato y resolución nueva imagen en {0}: {1}, {2}".format(rutaimagenesnuevas, img.format, img.size))
+    rutacompletaaljpeg = rutaimagenesnuevas + archivo[:-5] + ".jpeg"
+    img = Image.open(rutacompletaaljpeg)
+    print("Comprobación formato y resolución nueva imagen en {0}: {1}, {2}".format(rutacompletaaljpeg, img.format, img.size))
