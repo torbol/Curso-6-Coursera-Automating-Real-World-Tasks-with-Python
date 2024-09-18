@@ -9,6 +9,5 @@ def generate_report(attachment, title, paragraph):
   report_title = reportlab.platypus.Paragraph(title, styles["h1"])
   
   report_info = reportlab.platypus.Paragraph(paragraph, styles["BodyText"]) # Importante, para hacer saltos de linea en Paragraph usar etiqueta html <br/>
-  empty_line = reportlab.platypus.Spacer(1,20)
 
-  report.build([report_title, empty_line, report_info])
+  report.build([report_title, report_info])

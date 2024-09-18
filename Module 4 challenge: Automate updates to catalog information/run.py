@@ -6,7 +6,7 @@ from changeImage import listararchivos, RUTAIMAGENESNUEVAS
 
 #Definición constantes
 DESCRIPTIONSPATH = './supplier-data/descriptions' #Ruta descripciones .txt
-URL = "http://34.75.95.27/fruits/" #URL de la página de la empresa. Reemplazar <external-IP-address> con dirección IP externa que nos ha dado Google.
+URL = "http://<external-IP-address>/fruits/" #URL de la página de la empresa. Reemplazar <external-IP-address> con dirección IP externa que nos ha dado Google.
 
 def upload_dictionary_to_web(dictionary_f3, url_f3):
     """Se hace un request.post para subir el diccionario
